@@ -22,8 +22,6 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,8 +33,7 @@ final class LicenseFunctions {
      * The title of the .txt file is the license type (all lowercase),
      * with all the non alpha-numeric characters replaced with underscores.
      * @return the associated license, or an empty string if the license type could not be found. **/
-    @NotNull
-    static String getLicense (@NotNull String licenseType, @NotNull Context context) {
+    static String getLicense (String licenseType, Context context) {
         try {
             String text;
             StringBuilder stringBuilder = new StringBuilder();
