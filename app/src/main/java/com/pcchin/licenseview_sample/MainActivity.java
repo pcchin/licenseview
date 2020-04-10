@@ -34,13 +34,17 @@ public class MainActivity extends AppCompatActivity {
         // This one has no license
         licenseView.addLicense("Example 1");
         // This one has no headers
-        licenseView.addLicense("Example 2", LicenseType.APACHE_2);
+        licenseView.addLicense("Example 2", LicenseType.CDDL_1);
         // This one has custom headers
-        licenseView.addLicense("Example 3", LicenseType.MIT, "<b>Bold</b> and <i>Italic</i>");
+        licenseView.addLicense("Example 3", LicenseType.MOZILLA_PUBLIC_2, "<b>Bold</b> and <i>Italic</i>");
         // This one will overwrite existing license text
         // By default there is no space between header and license text
         licenseView.addLicense("Example 4", LicenseType.APACHE_2, "Custom Header",
                 "Custom License Text");
+        // String arrays with different lengths can work, as long as it is between 1 and 4
+        licenseView.addLicense(new String[]{"Example 5", LicenseType.NONE});
+        licenseView.addLicense(new String[]{"Example 6", "My Own License", "Copyright Some Guy",
+                "<br/>Here is my own license text with a newline in front"});
         // The actual license
         licenseView.addLicense(new String[]{"LicenseView", LicenseType.APACHE_2,
                 "Copyright 2020 <a href='https://github.com/pc-chin'>PC Chin</a>"});

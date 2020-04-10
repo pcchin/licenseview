@@ -1,0 +1,24 @@
+<p>This is free and unencumbered software released into the public domain.</p>
+<p><br></p>
+<p>Anyone is free to copy, modify, publish, use, compile, sell, or</p>
+<p>distribute this software, either in source code form or as a compiled</p>
+<p>binary, for any purpose, commercial or non-commercial, and by any</p>
+<p>means.</p>
+<p><br></p>
+<p>In jurisdictions that recognize copyright laws, the author or authors</p>
+<p>of this software dedicate any and all copyright interest in the</p>
+<p>software to the public domain. We make this dedication for the benefit</p>
+<p>of the public at large and to the detriment of our heirs and</p>
+<p>successors. We intend this dedication to be an overt act of</p>
+<p>relinquishment in perpetuity of all present and future rights to this</p>
+<p>software under copyright law.</p>
+<p><br></p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,</p>
+<p>EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF</p>
+<p>MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</p>
+<p>IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR</p>
+<p>OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,</p>
+<p>ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR</p>
+<p>OTHER DEALINGS IN THE SOFTWARE.</p>
+<p><br></p>
+<p>For more information, please refer to <a href="https://unlicense.org">https://unlicense.org</a></p>
