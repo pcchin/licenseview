@@ -28,8 +28,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -94,7 +92,7 @@ public class LicenseView extends LinearLayout {
     /** Adds a license to the view with a specified license type.
      * The license header is assumed to be blank. The license text is assumed to be blank
      * if none of the license types match that of any existing license types.**/
-    public void addLicense(String name, @NotNull String licenseType) {
+    public void addLicense(String name, String licenseType) {
         addLicense(name, licenseType, "");
     }
 
@@ -103,7 +101,7 @@ public class LicenseView extends LinearLayout {
      * any existing license types.
      *
      * HTML tags will be parsed in the license header and the license text. **/
-    public void addLicense(String name, @NotNull String licenseType, @NotNull String licenseHeader) {
+    public void addLicense(String name, String licenseType, String licenseHeader) {
         addLicense(name, licenseType, licenseHeader, LicenseFunctions.getLicense(licenseType, getContext()));
     }
 
@@ -111,8 +109,8 @@ public class LicenseView extends LinearLayout {
      * The license text for any set licenses will be overwritten as well.
      *
      * HTML tags will be parsed in the license header and the license text. **/
-    public void addLicense(final String name, @NotNull final String licenseType,
-                           @NotNull final String licenseHeader, @NotNull final String licenseText) {
+    public void addLicense(final String name, final String licenseType,
+                           final String licenseHeader, final String licenseText) {
         // The main function for adding a license to the view.
         @SuppressLint("InflateParams") LinearLayout licenseDisplay = (LinearLayout)
                 ((LayoutInflater) Objects.requireNonNull(getContext().
@@ -138,7 +136,7 @@ public class LicenseView extends LinearLayout {
     /** Adds a license to the view through an array.
      * @throws IllegalArgumentException will be thrown if the array size does not match the argument
      * size for any of the existing addLicense functions. **/
-    public void addLicense(@NotNull String[] license) {
+    public void addLicense(String[] license) {
         if (license.length == 1) {
             addLicense(license[0]);
         } else if (license.length == 2) {
@@ -158,7 +156,7 @@ public class LicenseView extends LinearLayout {
     /** Adds multiple licenses to the view through a list of String arrays.
      * @throws IllegalArgumentException will be thrown if any of the array size does not match the argument
      * size for any of the existing addLicense functions. **/
-    public void addMultipleLicenses(@NotNull List<String[]> licensesAdded) {
+    public void addMultipleLicenses(List<String[]> licensesAdded) {
         for (String[] license: licensesAdded) {
             addLicense(license);
         }
