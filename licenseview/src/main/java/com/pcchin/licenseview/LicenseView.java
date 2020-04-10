@@ -115,7 +115,7 @@ public class LicenseView extends LinearLayout {
         @SuppressLint("InflateParams") LinearLayout licenseDisplay = (LinearLayout)
                 ((LayoutInflater) Objects.requireNonNull(getContext().
                         getSystemService(Context.LAYOUT_INFLATER_SERVICE)))
-                        .inflate(R.layout.com_pcchin_licenseview_license_display, null);
+                        .inflate(R.layout.com_pcchin_licenseview_ubei678ejq58i89v7qep, null);
         ((TextView) licenseDisplay.findViewById(R.id.ld_lib)).setText(name);
         ((TextView) licenseDisplay.findViewById(R.id.ld_type)).setText(licenseType);
         licenseDisplay.setOnClickListener(new OnClickListener() {
