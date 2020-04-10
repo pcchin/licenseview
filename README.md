@@ -1,4 +1,6 @@
 # LicenseView
+[![](https://jitpack.io/v/pcchin/licenseview.svg)](https://jitpack.io/#pcchin/licenseview)
+
 ## Library Info
 This library is an extension of a LinearLayout that allows licenses to be displayed within its own Popup Views.
 The default view would be blank and to add licences to it, you would need to use the addLicense or addMultipleLicenses functions.
