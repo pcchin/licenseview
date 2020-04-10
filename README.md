@@ -71,6 +71,10 @@ For the layout XML, simply include the view as if it is an LinearLayout. e.g.:
     android:height="wrap_content"
 />
 ```
+
+## Example Implementation
+![](/example_implementation.png)
+
 ## Contribution
 Any contribution is welcome, feel free to add any issues or pull requests to the repository.
 
