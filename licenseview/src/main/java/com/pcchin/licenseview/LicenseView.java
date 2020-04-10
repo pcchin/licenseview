@@ -28,8 +28,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.pcchin.licenseview.R;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -117,7 +115,7 @@ public class LicenseView extends LinearLayout {
         @SuppressLint("InflateParams") LinearLayout licenseDisplay = (LinearLayout)
                 ((LayoutInflater) Objects.requireNonNull(getContext().
                         getSystemService(Context.LAYOUT_INFLATER_SERVICE)))
-                        .inflate(R.layout.license_display, null);
+                        .inflate(R.layout.com_pcchin_licenseview_license_display, null);
         ((TextView) licenseDisplay.findViewById(R.id.ld_lib)).setText(name);
         ((TextView) licenseDisplay.findViewById(R.id.ld_type)).setText(licenseType);
         licenseDisplay.setOnClickListener(new OnClickListener() {
