@@ -28,6 +28,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.pcchin.licenseview.R;
+
 import java.util.List;
 import java.util.Objects;
 
