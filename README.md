@@ -1,5 +1,5 @@
 # LicenseView
-[![](https://jitpack.io/v/pcchin/licenseview.svg)](https://jitpack.io/#pcchin/licenseview)
+[ ![Download](https://api.bintray.com/packages/pcchin/licenseview/com.pcchin.licenseview/images/download.svg) ](https://bintray.com/pcchin/licenseview/com.pcchin.licenseview/_latestVersion)
 
 ## Library Info
 This library is an extension of a LinearLayout that allows licenses to be displayed within its own Popup Views.
@@ -12,7 +12,7 @@ Some licenses are included by default, such as:
 - MIT
 - GNU GPL v3
 
-and many more. The full list can be found under the [LicenseType](/licenseview/java/com.pcchin.licenseview/LicenseType.class) class.
+and many more. The full list can be found under the [LicenseType](/licenseview/src/main/java/com/pcchin/licenseview/LicenseType.java) class.
 
 ## Installation
 This library is available in JCenter. To install, you would need to include the following into your `project/build.gradle`:
