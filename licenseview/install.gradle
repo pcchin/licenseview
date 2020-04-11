@@ -25,7 +25,7 @@ install {
                 groupId 'com.pcchin.licenseview'
                 artifactId 'licenseview'
                 name 'licenseview'
-                description 'A custom View for displaying licenses as popups.'
+                description 'A custom view for displaying licenses conveniently.'
                 url 'https://github.com/pcchin/licenseview'
 
                 licenses {
@@ -44,7 +44,7 @@ install {
                 }
 
                 scm {
-                    connection 'hhttps://github.com/pcchin/licenseview.git'
+                    connection 'https://github.com/pcchin/licenseview.git'
                     developerConnection 'https://github.com/pcchin/licenseview.git'
                     url 'https://github.com/pcchin/licenseview'
                 }

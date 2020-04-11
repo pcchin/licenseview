@@ -1,30 +1,3 @@
-apply plugin: 'com.jfrog.bintray'
-
-version = '1.1.0'
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    archiveClassifier.set('sources')
-}
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    archiveClassifier.set('javadoc')
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-Properties properties = new Properties()
-properties.load( new FileInputStream("local.properties"))
-
 /*
  * Copyright 2020 PC Chin.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,6 +13,39 @@ properties.load( new FileInputStream("local.properties"))
  * limitations under the License.
  */
 
+apply plugin: 'com.jfrog.bintray'
+version = '1.1.0'
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+afterEvaluate {
+    // Add other references to the javadoc
+    javadoc.classpath += files(android.libraryVariants.collect { variant ->
+        variant.getJavaCompileProvider().get().classpath.files
+    })
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load( new FileInputStream("local.properties"))
+
 // Bintray
 bintray {
     user = properties.getProperty("bintray.user")
@@ -49,11 +55,11 @@ bintray {
         repo = 'licenseview'
         name = 'com.pcchin.licenseview'
         configurations = ['archives']
-        desc = 'A custom View for displaying licenses as popups.'
+        desc = 'A custom view for displaying licenses conveniently.'
         websiteUrl = 'https://github.com/pcchin/licenseview'
         vcsUrl = 'https://github.com/pcchin/licenseview.git'
         licenses = ["Apache-2.0"]
         publish = true
-        publicDownloadNumbers = true
+        publicDownloadNumbers = false
     }
 }

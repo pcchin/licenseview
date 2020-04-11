@@ -12,11 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 apply plugin: 'com.android.library'
-// Publishing through GitHub
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.pcchin'
 
 android {
     compileSdkVersion 29
@@ -48,5 +44,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
+// Must be at the bottom of the file
 apply from: 'install.gradle'
 apply from: 'bintray.gradle'

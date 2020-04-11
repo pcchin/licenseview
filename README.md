@@ -15,21 +15,11 @@ Some licenses are included by default, such as:
 and many more. The full list can be found under the [LicenseType](/licenseview/java/com.pcchin.licenseview/LicenseType.class) class.
 
 ## Installation
-This library is installed on JitPack. To install, you would need to include the following into your `project/build.gradle`:
-
-```
-repositories { 
-    google()
-    jcenter()
-    maven { url “https://jitpack.io” }
-}
-```
-
-and the following into your `app/build.gradle`:
+This library is available in JCenter. To install, you would need to include the following into your `project/build.gradle`:
 
 ```
 dependencies {
-    implementation 'com.github.pcchin:licenseview:1.0.0'
+    implementation 'com.pcchin.licenseview:licenseview:1.1.0'
 }
 ```
 
