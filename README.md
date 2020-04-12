@@ -1,5 +1,6 @@
 # LicenseView
-[ ![Download](https://api.bintray.com/packages/pcchin/licenseview/com.pcchin.licenseview/images/download.svg) ](https://bintray.com/pcchin/licenseview/com.pcchin.licenseview/_latestVersion)
+[![Download](https://api.bintray.com/packages/pcchin/licenseview/com.pcchin.licenseview/images/download.svg)](https://bintray.com/pcchin/licenseview/com.pcchin.licenseview/_latestVersion)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-License%20View-green.svg?style=flat)](https://android-arsenal.com/details/1/8100)
 
 ## Library Info
 This library is an extension of a LinearLayout that allows licenses to be displayed within its own Popup Views.
@@ -18,9 +19,7 @@ and many more. The full list can be found under the [LicenseType](/licenseview/s
 This library is available in JCenter. To install, you would need to include the following into your `project/build.gradle`:
 
 ```
-dependencies {
-    implementation 'com.pcchin.licenseview:licenseview:1.1.0'
-}
+implementation 'com.pcchin.licenseview:licenseview:1.1.0'
 ```
 
 ## Usage
@@ -53,6 +52,16 @@ public void addLicense(@NotNull String[] license)
 ```
 
 Multiple licenses could also be added at a time through the `addMultipleLicenses` function, taking a List of String arrays as an argument.
+
+There are also setters for the following variables:
+
+`setFragmentManager`: Set the Fragment manager if the view is initialized in an activity that does not have `getSupportFragmentManager()`.
+
+`setTextSize`: Set the size of the text to be shown in the popup, defaults to 18.
+
+`setPadding`: Sets the padding around the text in the popup, defaults to 20.
+
+All the setters should be set before any `addLicense` functions are called.
 
 For the layout XML, simply include the view as if it is an LinearLayout. e.g.:
 ```XML
