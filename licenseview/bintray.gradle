@@ -14,7 +14,7 @@
  */
 
 apply plugin: 'com.jfrog.bintray'
-version = '1.1.0'
+version = '1.1.1'
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -57,9 +57,19 @@ bintray {
         configurations = ['archives']
         desc = 'A custom view for displaying licenses conveniently.'
         websiteUrl = 'https://github.com/pcchin/licenseview'
+        issueTrackerUrl = 'https://github.com/pcchin/licenseview/issues'
         vcsUrl = 'https://github.com/pcchin/licenseview.git'
-        licenses = ["Apache-2.0"]
+        licenses = ['Apache-2.0']
         publish = true
         publicDownloadNumbers = false
+        githubRepo = 'pcchin/licenseview'
+
+        version {
+            name = '1.1.1'
+            vcsTag = '1.1.1'
+            gpg {
+                sign = true
+            }
+        }
     }
 }
