@@ -25,8 +25,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.pcchin.customdialog.DefaultDialogFragment;
 
 import java.util.List;
 import java.util.Objects;
@@ -62,16 +65,16 @@ public class LicenseView extends LinearLayout {
 
     //****** SETTERS ******//
 
-    /** Sets the text size for the licenses.
+    /** Sets the default text size to be shown in the popup.
      * This method should be called before any licenses are added. **/
-    public void setTextSize(int newSize) {
-        textSize = newSize;
+    public void setTextSize(int size) {
+        textSize = size;
     }
 
-    /** Sets the padding size for the licenses.
+    /** Sets the size of the padding for the popup.
      * This method should be called before any licenses are added. **/
-    public void setPaddingSize(int newSize) {
-        paddingSize = newSize;
+    public void setPadding(int size) {
+        paddingSize = size;
     }
 
     /** Sets the fragment manager used to display the popups.
@@ -122,12 +125,18 @@ public class LicenseView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 Log.d("Test", "Clicked");
-                // Display dialog fragment
+                // Copies the properties of the default TextView over
                 TextView textView = new TextView(getContext());
                 textView.setTextSize(textSize);
                 textView.setPadding(paddingSize, paddingSize, paddingSize, paddingSize);
+                // Display dialog fragment
                 LicenseFunctions.setHtml(textView, licenseHeader + licenseText);
-                new AutoDismissDialog(name, textView).show(fragmentManager, "LicenseView." + name);
+                new DefaultDialogFragment(new AlertDialog.Builder(getContext())
+                        .setTitle(name)
+                        .setView(textView)
+                        .setPositiveButton("Close", null)
+                        .create(),
+                        fragmentManager, "LicenseView." + name).show();
             }
         });
         addView(licenseDisplay);
