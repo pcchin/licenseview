@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         licenseView.addLicense(new String[]{"Example 5", LicenseType.NONE});
         licenseView.addLicense(new String[]{"Example 6", "My Own License", "Copyright Some Guy",
                 "<br/>Here is my own license text with a newline in front"});
+        licenseView.addLicense(new String[]{"CustomDialog", LicenseType.APACHE_2,
+                "Copyright 2020 <a href='https://github.com/pc-chin'>PC Chin</a>"});
         // The actual license
         licenseView.addLicense(new String[]{"LicenseView", LicenseType.APACHE_2,
                 "Copyright 2020 <a href='https://github.com/pc-chin'>PC Chin</a>"});
