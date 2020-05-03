@@ -76,6 +76,7 @@ public class LicenseView extends LinearLayout {
     //****** SETTERS ******//
 
     /** Sets the default text size to be shown in the popup.
+     * This method will override the text size set within setTextAppearance.
      * This method should be called before any licenses are added. **/
     public void setTextSize(int size) {
         textSize = size;
@@ -167,6 +168,7 @@ public class LicenseView extends LinearLayout {
             public void onClick(View v) {
                 // Copies the properties of the default TextView over
                 TextView textView = new TextView(getContext());
+                textView.setTextAppearance(getContext(), appearance);
                 textView.setTextSize(textSize);
                 textView.setPadding(paddingSize, paddingSize, paddingSize, paddingSize);
                 textView.setTypeface(typeface, typefaceStyle);
