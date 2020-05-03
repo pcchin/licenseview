@@ -20,7 +20,7 @@ and many more. The full list can be found under the [LicenseType](/licenseview/s
 This library is available in JCenter and Maven Central. To install, you would need to include the following into your `project/build.gradle`:
 
 ```
-implementation 'com.pcchin.licenseview:licenseview:1.3.0'
+implementation 'com.pcchin.licenseview:licenseview:1.3.1'
 ```
 
 ## Usage
@@ -61,15 +61,10 @@ There are also setters for the following variables:
 `setTextSize`: Sets the size of the text to be shown in the popup, defaults to 18.
 
 `setTextColor`: Sets the color of the text to be shown in the popup.
-If the color is not set, the color set in the appearance of the text would be used.
 
 `setLinkColor`: Sets the color of the link to be shown in the popup.
-If the color is not set, the color set in the appearance of the text would be used.
 
 `setPadding`: Sets the padding around the text in the popup, defaults to 20.
-
-`setApperance`: Sets the appearance for the text in the popup, defaults to R.style.TextAppearance_AppCompat_Display1. 
-The text size and typeface set in the text appearance will be overridden by setTextSize and setTypeface automatically. 
 
 `setTypeface`: Sets the typeface for the text in the popup, defaults to no typeface (null) with Typeface.NORMAL.
 

@@ -42,7 +42,6 @@ import java.util.Objects;
  * Do note that the orientation of the view can only be vertical.**/
 public class LicenseView extends LinearLayout {
     // TextView attributes
-    private int appearance = R.style.TextAppearance_AppCompat_Display1;
     private int textSize = 18;
     private int paddingSize = 20;
     private Typeface typeface;
@@ -77,14 +76,12 @@ public class LicenseView extends LinearLayout {
     //****** SETTERS ******//
 
     /** Sets the default text size to be shown in the popup.
-     * This method will override the text size set within setTextAppearance.
      * This method should be called before any licenses are added. **/
     public void setTextSize(int size) {
         textSize = size;
     }
 
     /** Sets the typeface of the text in the popup.
-     * This method will override the typeface set within setTextAppearance.
      * This method should be called before any licenses are added. **/
     public void setTypeface(Typeface typeface) {
         setTypeface(typeface, Typeface.NORMAL);
@@ -98,23 +95,15 @@ public class LicenseView extends LinearLayout {
     }
 
     /** Sets the default text color to be shown in the popup.
-     * This method will override the text color set within setTextAppearance.
      * This method should be called before any licenses are added. **/
     public void setTextColor(int color) {
         textColor = color;
     }
 
     /** Sets the default link color to be shown in the popup.
-     * This method will override the link color set within setTextAppearance.
      * This method should be called before any licenses are added. **/
     public void setLinkColor(int color) {
         linkColor = color;
-    }
-
-    /** Sets the text appearance for the text in the popup.
-     * This method will be overridden by setTextSize and setTypeface. **/
-    public void setTextAppearance(int textAppearance) {
-        appearance = textAppearance;
     }
 
     /** Sets the size of the padding for the popup.
@@ -178,7 +167,6 @@ public class LicenseView extends LinearLayout {
             public void onClick(View v) {
                 // Copies the properties of the default TextView over
                 TextView textView = new TextView(getContext());
-                textView.setTextAppearance(getContext(), appearance);
                 textView.setTextSize(textSize);
                 textView.setPadding(paddingSize, paddingSize, paddingSize, paddingSize);
                 textView.setTypeface(typeface, typefaceStyle);
