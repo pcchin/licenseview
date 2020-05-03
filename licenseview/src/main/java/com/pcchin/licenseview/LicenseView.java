@@ -17,8 +17,10 @@ package com.pcchin.licenseview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -39,8 +41,17 @@ import java.util.Objects;
  * addLicense or addMultipleLicenses functions.
  * Do note that the orientation of the view can only be vertical.**/
 public class LicenseView extends LinearLayout {
+    // TextView attributes
+    private int appearance = R.style.TextAppearance_AppCompat_Display1;
     private int textSize = 18;
     private int paddingSize = 20;
+    private Typeface typeface;
+    private int typefaceStyle = Typeface.NORMAL;
+    private int textColor = Color.TRANSPARENT;
+    private int linkColor = Color.TRANSPARENT;
+
+    // Other attributes
+    private int alertDialogStyle = R.style.Theme_AppCompat_Light_Dialog_Alert;
     private FragmentManager fragmentManager;
 
     //****** CONSTRUCTORS ******//
@@ -66,15 +77,56 @@ public class LicenseView extends LinearLayout {
     //****** SETTERS ******//
 
     /** Sets the default text size to be shown in the popup.
+     * This method will override the text size set within setTextAppearance.
      * This method should be called before any licenses are added. **/
     public void setTextSize(int size) {
         textSize = size;
+    }
+
+    /** Sets the typeface of the text in the popup.
+     * This method will override the typeface set within setTextAppearance.
+     * This method should be called before any licenses are added. **/
+    public void setTypeface(Typeface typeface) {
+        setTypeface(typeface, Typeface.NORMAL);
+    }
+
+    /** Sets the typeface of the text in the popup with style included.
+     * This method should be called before any licenses are added. **/
+    public void setTypeface(Typeface typeface, int style) {
+        this.typeface = typeface;
+        typefaceStyle = style;
+    }
+
+    /** Sets the default text color to be shown in the popup.
+     * This method will override the text color set within setTextAppearance.
+     * This method should be called before any licenses are added. **/
+    public void setTextColor(int color) {
+        textColor = color;
+    }
+
+    /** Sets the default link color to be shown in the popup.
+     * This method will override the link color set within setTextAppearance.
+     * This method should be called before any licenses are added. **/
+    public void setLinkColor(int color) {
+        linkColor = color;
+    }
+
+    /** Sets the text appearance for the text in the popup.
+     * This method will be overridden by setTextSize and setTypeface. **/
+    public void setTextAppearance(int textAppearance) {
+        appearance = textAppearance;
     }
 
     /** Sets the size of the padding for the popup.
      * This method should be called before any licenses are added. **/
     public void setPadding(int size) {
         paddingSize = size;
+    }
+
+    /** Sets the style of the AlertDialog shown.
+     * This method should be called before any licenses are made. **/
+    public void setAlertDialogStyle(int style) {
+        alertDialogStyle = style;
     }
 
     /** Sets the fragment manager used to display the popups.
@@ -124,14 +176,21 @@ public class LicenseView extends LinearLayout {
         licenseDisplay.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Test", "Clicked");
                 // Copies the properties of the default TextView over
                 TextView textView = new TextView(getContext());
+                textView.setTextAppearance(getContext(), appearance);
                 textView.setTextSize(textSize);
                 textView.setPadding(paddingSize, paddingSize, paddingSize, paddingSize);
+                textView.setTypeface(typeface, typefaceStyle);
+                if (textColor != Color.TRANSPARENT) {
+                    textView.setTextColor(textColor);
+                }
+                if (linkColor != Color.TRANSPARENT) {
+                    textView.setLinkTextColor(linkColor);
+                }
                 // Display dialog fragment
                 LicenseFunctions.setHtml(textView, licenseHeader + licenseText);
-                new DefaultDialogFragment(new AlertDialog.Builder(getContext())
+                new DefaultDialogFragment(new AlertDialog.Builder(new ContextThemeWrapper(getContext(), alertDialogStyle))
                         .setTitle(name)
                         .setView(textView)
                         .setPositiveButton("Close", null)

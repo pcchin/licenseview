@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         // No need to set fragment manager as this activity is a subclass of FragmentActivity
         LicenseView licenseView = findViewById(R.id.license);
+        // licenseView.setAlertDialogStyle(R.style.Theme_AppCompat_Dialog_Alert);
         // This one has no license
         licenseView.addLicense("Example 1");
         // This one has no headers
