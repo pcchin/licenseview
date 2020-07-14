@@ -168,7 +168,6 @@ public class LicenseView extends LinearLayout {
             public void onClick(View v) {
                 // Copies the properties of the default TextView over
                 TextView textView = new TextView(getContext());
-                textView.setTextAppearance(getContext(), appearance);
                 textView.setTextSize(textSize);
                 textView.setPadding(paddingSize, paddingSize, paddingSize, paddingSize);
                 textView.setTypeface(typeface, typefaceStyle);
