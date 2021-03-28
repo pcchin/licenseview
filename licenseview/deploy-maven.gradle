@@ -1,0 +1,163 @@
+/*
+ * Copyright 2021 PC Chin.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+* Usage:
+* Place the file in the same folder as your build.gradle.
+*
+* In build.gradle for your library, add the following:
+* ...
+* // Place at the end of the file
+* ext {
+*     PUBLISH_GROUP_ID = 'com.example.lib'
+*     PUBLISH_ARTIFACT_ID = 'library'
+*     PUBLISH_VERSION = '1.2.3'
+*     PUBLISH_VCS = 'github.com/user/repo'
+*     PUBLISH_DESC = 'A sample repository.'
+*     USE_S01_OSSRH = false
+* }
+* apply from: 'deploy-maven-gradle'
+*
+* The following Gradle tasks can be used:
+* publishAllPublicationsToOssrhRepository
+* publishAllPublicationsToPcchinRepoRepository
+* */
+
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+group = PUBLISH_GROUP_ID
+version = PUBLISH_VERSION
+
+Properties localProp = new Properties()
+localProp.load(new FileInputStream("$projectDir/../local.properties"))
+
+// Set up variables
+ext["signing.keyId"] = System.getenv('SIGNING_KEY_ID') != null ? System.getenv('SIGNING_KEY_ID') : localProp.getProperty("signing.keyId")
+ext["signing.password"] = System.getenv('SIGNING_PASSWORD') != null ? System.getenv('SIGNING_PASSWORD') : localProp.getProperty("signing.password")
+ext["signing.secretKeyRingFile"] = System.getenv('SIGNING_SECRET_KEY_RING_FILE') != null ? System.getenv('SIGNING_SECRET_KEY_RING_FILE') : localProp.getProperty("signing.secretKeyRingFile")
+String ossrhUsername = System.getenv("OSSRH_USERNAME") != null ? System.getenv("OSSRH_USERNAME") : localProp.getProperty("ossrh.username")
+String ossrhPassword = System.getenv("OSSRH_PASSWORD") != null ? System.getenv("OSSRH_PASSWORD") : localProp.getProperty("ossrh.password")
+String pcchinRepoUsername = System.getenv("PCCHIN_REPO_USERNAME") != null ? System.getenv("PCCHIN_REPO_USERNAME") : localProp.getProperty("pcchinrepo.username")
+String pcchinRepoPassword = System.getenv("PCCHIN_REPO_PASSWORD") != null ? System.getenv("PCCHIN_REPO_PASSWORD") : localProp.getProperty("pcchinrepo.password")
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+afterEvaluate {
+    // Add other references to the javadoc
+    javadoc.classpath += files(android.libraryVariants.collect { variant ->
+        variant.getJavaCompileProvider().get().classpath.files
+    })
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId PUBLISH_GROUP_ID
+            artifactId PUBLISH_ARTIFACT_ID
+            version PUBLISH_VERSION
+
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = PUBLISH_ARTIFACT_ID
+                description = PUBLISH_DESC
+                url = "https://${PUBLISH_VCS}"
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'pcchin'
+                        name = 'PC Chin'
+                        email = 'pcchin@pcchin.com'
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://${PUBLISH_VCS}.git"
+                    developerConnection = "scm:git:ssh://${PUBLISH_VCS}.git"
+                    url = "https://${PUBLISH_VCS}"
+                }
+                // A slightly hacky fix so that your POM will include any transitive dependencies
+                // that your library builds upon
+                withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    project.configurations.implementation.allDependencies.each {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            def ossrhRelease = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def ossrhSnapshots = "https://oss.sonatype.org/content/repositories/snapshots/"
+            def ossrh01Release = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def ossrh01Snapshots = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+
+            name = "ossrh"
+            if (USE_S01_OSSRH) {
+                url = version.endsWith('SNAPSHOT') ? ossrh01Snapshots : ossrh01Release
+            } else {
+                url = version.endsWith('SNAPSHOT') ? ossrhSnapshots : ossrhRelease
+            }
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+        maven {
+            def pcchinRelease = "https://nexus.pcchin.com/repository/maven-releases/"
+            def pcchinSnapshots = "https://nexus.pcchin.com/repository/maven-snapshots/"
+
+            name="pcchinRepo"
+            url = version.endsWith('SNAPSHOT') ? pcchinSnapshots : pcchinRelease
+            credentials {
+                username pcchinRepoUsername
+                password pcchinRepoPassword
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications
+}
