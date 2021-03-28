@@ -1,5 +1,4 @@
 # LicenseView
-[![Bintray](https://api.bintray.com/packages/pcchin/licenseview/com.pcchin.licenseview/images/download.svg)](https://bintray.com/pcchin/licenseview/com.pcchin.licenseview/_latestVersion)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.pcchin.licenseview/licenseview/badge.svg)](https://search.maven.org/artifact/com.pcchin.licenseview/licenseview)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-License%20View-green.svg?style=flat)](https://android-arsenal.com/details/1/8100)
 
@@ -17,9 +16,29 @@ Some licenses are included by default, such as:
 and many more. The full list can be found under the [LicenseType](/licenseview/src/main/java/com/pcchin/licenseview/LicenseType.java) class.
 
 ## Installation
-This library is available in JCenter and Maven Central. To install, you would need to include the following into your `project/build.gradle`:
+This library is available in Maven Central and a backup is available on my personal repository. To install, you would need to include the following into your `project/build.gradle`:
 
+```
 implementation 'com.pcchin.licenseview:licenseview:1.3.3'
+```
+
+You may also need to include the following in your `build.gradle`:
+
+```
+buildscript {
+    ...
+}
+
+allprojects {
+    ...
+    repositories {
+        ...
+        // Use this if Maven Central is not working
+        // maven { url "https://nexus.pcchin.com/repository/maven-releases/" }
+        mavenCentral()
+    }
+}
+```
 
 ## Usage
 
