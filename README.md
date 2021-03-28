@@ -19,9 +19,7 @@ and many more. The full list can be found under the [LicenseType](/licenseview/s
 ## Installation
 This library is available in JCenter and Maven Central. To install, you would need to include the following into your `project/build.gradle`:
 
-```
-implementation 'com.pcchin.licenseview:licenseview:1.3.2'
-```
+implementation 'com.pcchin.licenseview:licenseview:1.3.3'
 
 ## Usage
 
